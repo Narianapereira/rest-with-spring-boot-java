@@ -41,5 +41,6 @@ public class ExceptionResponse implements Serializable{
 	public void setDetails(String details) {
 		this.details = details;
 	}
-
+	
 }
+	
