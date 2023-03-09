@@ -53,7 +53,7 @@ public class PersonServices {
 	public PersonVO create(PersonVO person) throws Exception {
 		
 		logger.info("Creating one person");
-		var entity = DozerMapper.parseObject(person, Person.class);
+		Person entity = DozerMapper.parseObject(person, Person.class);
 		var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
 		vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
 		return vo;
