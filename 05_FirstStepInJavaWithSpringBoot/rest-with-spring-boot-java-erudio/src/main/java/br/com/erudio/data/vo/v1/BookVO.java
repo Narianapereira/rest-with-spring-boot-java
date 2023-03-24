@@ -2,7 +2,7 @@ package br.com.erudio.data.vo.v1;
 
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 import org.springframework.hateoas.RepresentationModel;

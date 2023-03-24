@@ -10,6 +10,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import org.springframework.stereotype.Service;
 
+import br.com.erudio.controllers.BookController;
 import br.com.erudio.controllers.PersonController;
 import br.com.erudio.data.vo.v1.BookVO;
 import br.com.erudio.data.vo.v1.PersonVO;
@@ -32,14 +33,14 @@ public class BookServices {
 	public List<BookVO> findAll() {
 		
 		var books = DozerMapper.parseListObjects(repository.findAll(), BookVO.class);
-	/*books.stream().forEach(b -> {
+	books.stream().forEach(b -> {
 		try {
-			b.add(linkTo(methodOn(PersonController.class).findById(b.getKey())).
+			b.add(linkTo(methodOn(BookController.class).findById(b.getKey())).
 					withSelfRel());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	});*/
+	});
 	return books;
 	}
 	
@@ -50,7 +51,7 @@ public class BookServices {
 		var entity = repository.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		var vo = DozerMapper.parseObject(entity, BookVO.class);
-		//vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+		vo.add(linkTo(methodOn(BookController.class).findById(id)).withSelfRel());
 		return vo;
 	}
 	
@@ -61,7 +62,7 @@ public class BookServices {
 		logger.info("Creating one book");
 		Book entity = DozerMapper.parseObject(book, Book.class);
 		BookVO vo = DozerMapper.parseObject(repository.save(entity), BookVO.class);
-		//vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
+		vo.add(linkTo(methodOn(BookController.class).findById(vo.getKey())).withSelfRel());
 		return vo;
 	}
 	
@@ -80,7 +81,7 @@ public class BookServices {
     	entity.setTitle(book.getTitle());
 
     	var vo = DozerMapper.parseObject(repository.save(entity), BookVO.class);
-    	//vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
+    	vo.add(linkTo(methodOn(BookController.class).findById(vo.getKey())).withSelfRel());
 		return vo;
 	}
     
