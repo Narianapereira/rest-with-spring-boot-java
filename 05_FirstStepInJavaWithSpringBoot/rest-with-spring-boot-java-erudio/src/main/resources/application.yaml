@@ -13,12 +13,14 @@ spring:
     password: 37141719nrp
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: none  
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: false
 springdoc:
-  pathsToMatch: /api/**/v1/**
+  pathsToMatch: 
+    - /auth/**
+    - /api/**/v1/**
   swagger-ui:
     use-root-path: true
